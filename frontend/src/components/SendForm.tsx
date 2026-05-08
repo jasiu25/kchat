@@ -9,12 +9,14 @@ export default function SendForm(props: SendMessageProps) {
         e.preventDefault()
         if (!props.socket) return
 
-        props.socket.emit("message", {
-            username: props.username,
-            content: message,
-            type: "text"
-        })
-        setMessage("")
+        if (message.trim() !== "") {
+            props.socket.emit("message", {
+                username: props.username,
+                content: message,
+                type: "text"
+            })
+            setMessage("")
+        }
     }
 
     return (

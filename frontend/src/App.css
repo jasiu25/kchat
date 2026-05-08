@@ -63,3 +63,16 @@ main form button {
   padding: 8px;
   border-radius: 16px;
 }
+
+#messages-wrapper button {
+  position: absolute;
+  right: 50%;
+  bottom: 20%;
+  translate: 50% 50%;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+}
