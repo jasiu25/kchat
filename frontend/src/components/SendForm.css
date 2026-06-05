@@ -1,0 +1,64 @@
+/* 
+  TO DO:
+  - Responsivity
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    background-color: rgba(61, 61, 61, .222);
+    filter: blur();
+    color: #ffffff;
+    outline: none;
+    height: 28px;
+    vertical-align: middle;
+    padding: 8px;
+    border-radius: 16px;
+    flex-grow: 1;
+    border: 1px solid rgba(255, 255, 255, .222);
+}
+
+form {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+}
+
+button img {
+    width: 28px;
+    vertical-align: middle;
+    filter: invert();
+}
+
+form button{
+    vertical-align: middle;
+    background: none;
+    position: absolute;
+    cursor: pointer;
+    opacity: 60%;
+    border: 0;
+    padding: 4px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+button:hover {
+    opacity: 80%;
+    background-color: rgba(255, 255, 255, .222);
+}
+
+#send {
+    right: 1.2rem;
+}
+
+#send img {
+    translate: 0% 5%;
+}
+
+#add {
+    right: 3.3rem;
+}

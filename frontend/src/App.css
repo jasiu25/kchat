@@ -6,13 +6,13 @@
 
 #wrapper {
   height: 100vh;
-  background-color: #3f3f3f;
+  background-color: #212121;
   display: grid;
   place-items: center;
 }
 
 main {
-  background-color: #593959;
+  background: radial-gradient(ellipse at bottom, #321b35 0%, #090a0f 100%);
   height: 80vh;
   width: 80%;
   color: white;
@@ -22,26 +22,6 @@ main {
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-}
-
-main form {
-  margin-top: 16px;
-  width: 100%;
-  display: flex;
-  gap: 8px;
-}
-
-main form input {
-  border: none;
-  padding: 8px;
-  border-radius: 16px;
-  flex-grow: 1;
-}
-
-main form button {
-  border: 0;
-  padding: 8px;
-  border-radius: 16px;
 }
 
 #messages-wrapper {
@@ -59,7 +39,10 @@ main form button {
   width: fit-content;
   max-width: 70%;
   flex-grow: 1;
-  background-color: #303030;
+  background-color: rgba(255, 255, 255, 0.074);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.222);
   padding: 8px;
   border-radius: 16px;
 }
@@ -67,12 +50,26 @@ main form button {
 #messages-wrapper button {
   position: absolute;
   right: 50%;
-  bottom: 20%;
+  bottom: 16%;
   translate: 50% 50%;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
+  background-color: rgba(61, 61, 61, .222);
+  border: 1px solid rgba(255, 255, 255, .222);
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 60%;
+}
+
+#messages-wrapper button:hover {
+  opacity: 80%;
+  background-color: rgba(255, 255, 255, .222);
+}
+
+#message-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
 }

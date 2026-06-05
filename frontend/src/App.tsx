@@ -1,3 +1,11 @@
+/* 
+  TO DO:
+  - Add better username system. When user logs in
+    for the first time generate him a UUID and
+    store usernames with corresponding UUID in DB
+    to prevent two users having the same username.
+*/
+
 import { useEffect, useState } from "react"
 import { io, type Socket } from "socket.io-client"
 import Messages from "./components/Messages"

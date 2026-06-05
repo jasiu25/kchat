@@ -1,9 +1,42 @@
-import { useEffect, useState, useRef } from "react"
+/* 
+  TO DO:
+  - When sending attachments will be done, update this code to display them
+*/
+
+import { useEffect, useState, useRef, useReducer } from "react"
 import type { Message } from "../types/Message"
 import type { MessageProps } from "../types/MessageProps"
+import type { MessageAction } from "../types/MessageAction"
+import type { MessageGroup } from "../types/MessageGroup"
+import arrow from "../assets/arrow-down-large-svgrepo-com.png"
+
+const messagesReducer = (state: MessageGroup[], action: MessageAction) => {
+    switch (action.type) {
+        case "ADD_MESSAGE":
+            const lastGroup = state.at(-1)
+            if (lastGroup && lastGroup.username === action.payload.username) {
+                return state.map((group, index) =>
+                    index === state.length - 1
+                        ? {...group, messages: [...group.messages, action.payload]}
+                        : group
+                )
+                
+            } else {
+                return [
+                    ...state, {
+                        username: action.payload.username,
+                        messages: [action.payload]
+                    }
+                ]
+            }
+            
+        default:
+            return state
+    }
+}
 
 export default function Messages(props: MessageProps) {
-    const [messages, setMessages] = useState<Message[]>([])
+    const [messages, dispatch] = useReducer(messagesReducer, [])
     const [initialized, setInitialized] = useState<boolean>(false)
     const [buttonVisible, setButtonVisible] = useState<boolean>(false)
     const endRef = useRef<HTMLDivElement | null>(null)
@@ -14,7 +47,7 @@ export default function Messages(props: MessageProps) {
         if (!props.socket) return
 
         const handleMessage = function(arg: Message) {
-            setMessages(prev => [...prev, arg])
+            dispatch({ type: "ADD_MESSAGE", payload: arg })
         }
 
         props.socket.on("message", handleMessage)
@@ -53,6 +86,10 @@ export default function Messages(props: MessageProps) {
         return () => wrapper.removeEventListener("scroll", handleUserScroll)
     }, [])
 
+    useEffect(() => {
+        setButtonVisible(!isAtBottom)
+    }, [messages])
+
     const isAtBottom = () => {
         if (!messagesWrapper.current) return false
             
@@ -63,23 +100,31 @@ export default function Messages(props: MessageProps) {
         )
     }
 
+    // Scroll smoothly to the bottom of the page
     const handleScroll = function() {
         endRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
     return (
         <div id="messages-wrapper" ref={messagesWrapper}>
-            {messages?.map((message, index) => {
+            {messages?.map((messageGroup, index) => {
                 return (
                     <div id="message-group" key={index}>
-                        {message.username}
-                        <div id="message">
-                            {message.content}
-                        </div>
+                        {messageGroup.username}
+                        {messageGroup.messages.map((message, idx) => {
+                            return (
+                                <div id="message" key={idx}>
+                                    {message.content}
+                                </div>
+                            )
+                        })}
                     </div>
                 )
             })}
-            {buttonVisible && <button onClick={handleScroll}>&darr;</button>}
+
+            {buttonVisible && <button onClick={handleScroll} id="down">
+                <img src={arrow} alt="&darr;" />    
+            </button>}
             <div ref={endRef}></div>
         </div>
     )
