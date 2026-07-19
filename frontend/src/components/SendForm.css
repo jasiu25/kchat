@@ -34,7 +34,7 @@ button img {
     filter: invert();
 }
 
-form button{
+form button, form div {
     vertical-align: middle;
     background: none;
     position: absolute;
@@ -57,6 +57,10 @@ button:hover {
 
 #send img {
     translate: 0% 5%;
+}
+
+form input[type="file"] {
+    display: none;
 }
 
 #add {

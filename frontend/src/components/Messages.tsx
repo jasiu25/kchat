@@ -59,10 +59,12 @@ export default function Messages(props: MessageProps) {
 
     // Scroll to the newest message on load
     useEffect(() => {
-        if (!initialized && messages.length > 0) {
-            endRef.current?.scrollIntoView()    
-            setInitialized(true)
-        }
+        setTimeout(() => {
+            if (!initialized && messages.length > 0) {
+                endRef.current?.scrollIntoView()    
+                setInitialized(true)
+            }
+        }, 10)
     }, [initialized, messages])
 
     // When new message appears, scroll to it but only if client is on the bottom of the chat
