@@ -14,6 +14,9 @@ services:
       - ./server/.env
     depends_on:
       - database
+    volumes:
+      - server-uploads:/app/uploads
+      - /mnt/dane/dev/Web/kchat/server:/app
     ports:
       - 3000:3000
 
@@ -28,3 +31,4 @@ services:
 
 volumes:
   database-data:
+  server-uploads:

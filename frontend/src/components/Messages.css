@@ -1,0 +1,8 @@
+img {
+  max-width: 420px;
+}
+
+#message {
+  display: flex;
+  flex-direction: column;
+}
